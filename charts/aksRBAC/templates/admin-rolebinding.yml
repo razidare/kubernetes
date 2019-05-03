@@ -1,0 +1,13 @@
+#binds cluster admin role to Azure AD group for RBAC control
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+ name: {{ .Values.rolebinding.admin.name }}
+roleRef:
+ apiGroup: rbac.authorization.k8s.io
+ kind: ClusterRole
+ name: {{ .Values.role.admin.name }}
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: {{ .Values.rolebinding.admin.kind }}
+  name: {{ .Values.rolebinding.admin.groupID }}

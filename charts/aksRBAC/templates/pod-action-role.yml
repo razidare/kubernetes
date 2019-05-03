@@ -1,0 +1,21 @@
+#creates custom cluster role with certain permissions (mostly pod/service permissions)
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: {{ .Values.role.read.name }}
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["delete","get","list","watch","portforward"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["*"]
+- apiGroups: [""]
+  resources: ["pods/portforward"]
+  verbs: ["*"]
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get","list","watch"]
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list", "watch"]

@@ -1,0 +1,29 @@
+# Default values for rbac.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+role:
+  admin:
+    name: cluster-admin
+  read:
+    name: cluster-reader
+  azdevops:
+    name: cluster-admin
+
+rolebinding:
+  admin:
+    name: admin-rolebinding
+    kind: Group
+    groupID: "#{aksAdminGroupId}#" #will be replaced in AzureDevops by the "Replace Tokens" task during build
+  read:
+    name: reader-rolebinding
+    kind: Group
+    groupID: "#{aksReadGroupId}#" #will be replaced in AzureDevops by the "Replace Tokens" task during build
+  azdevops:
+    name: azure-devops-rolebinding
+    namespace: kube-system
+
+serviceaccount:
+  azdevops:
+    name: azure-devops-serviceaccount
+    namespace: kube-system

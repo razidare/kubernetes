@@ -1,0 +1,13 @@
+#binds custom role to Azure AD group for RBAC
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+ name: {{ .Values.rolebinding.read.name }}
+roleRef:
+ apiGroup: rbac.authorization.k8s.io
+ kind: ClusterRole
+ name: {{ .Values.role.read.name }}
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: {{ .Values.rolebinding.read.kind }}
+  name: {{ .Values.rolebinding.read.groupID }}
